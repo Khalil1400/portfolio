@@ -1,5 +1,10 @@
 # Portfolio Website
 
+CSC263 GitHub practice by Khalil1400. Based on the application from
+https://github.com/Ali-Moukallid/Portfolio.
+
+See [TUTORIAL.md](TUTORIAL.md) for the completed Git exercise and local startup instructions.
+
 A Django-based portfolio website featuring a professional CV, current work showcase, and collaboration system.
 
 ## Features
@@ -114,7 +119,7 @@ For production deployment:
 
 ## Technologies Used
 
--   Django 5.0.2
+-   Django 5.2 (see requirements.txt)
 -   Bootstrap 5
 -   Font Awesome
 -   SQLite3
@@ -125,7 +130,8 @@ For production deployment:
 -   The project uses Django's built-in security features
 -   CSRF protection is enabled
 -   Form validation is implemented
--   Admin interface is protected by authentication
+-   Django Admin (`/admin/`) is protected by authentication
+-   The original custom dashboard (`/admin-dashboard/`) has no authentication guard; this exercise is for local use
 -   Sensitive data is stored securely in the database
 
 ## Contributing
