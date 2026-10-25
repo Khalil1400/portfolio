@@ -7,3 +7,9 @@ db.sqlite3-*
 .env
 media/*
 !media/.gitkeep
+
+# Private environment variants
+.env.*
+!.env.example
+!.env.sample
+!.env.template
