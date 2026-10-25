@@ -3,11 +3,21 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-your-secret-key-here'
+# Read deployment secrets from the process environment.
+DEBUG = os.environ.get("DJANGO_DEBUG", "False").lower() in {"1", "true", "yes"}
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+if not SECRET_KEY:
+    if DEBUG:
+        # Local development only: never reuse a public signing key.
+        from django.core.management.utils import get_random_secret_key
+        SECRET_KEY = get_random_secret_key()
+    else:
+        from django.core.exceptions import ImproperlyConfigured
+        raise ImproperlyConfigured("Set DJANGO_SECRET_KEY, or DJANGO_DEBUG=True for local development.")
 
-DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [host.strip() for host in os.environ.get(
+    "DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,[::1]"
+).split(",") if host.strip()]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
